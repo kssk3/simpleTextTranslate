@@ -18,21 +18,18 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- 설정 페이지 추가 -->
-        <applicationConfigurable
-                instance="woowacourse.textTranslate.settings.TranslateSettingsConfigurable"
-                id="woowacourse.textTranslate.settings"
-                displayName="Text Translate"/>
+        <!-- TranslatorSettings 서비스 등록 -->
+        <applicationService serviceImplementation="woowacourse.textTranslate.plugin.TranslatorSettings"/>
     </extensions>
 
     <actions>
-        <!-- 번역 액션 추가 -->
-        <action id="woowacourse.textTranslate.TranslateAction"
-                class="woowacourse.textTranslate.action.TranslateAction"
-                text="Translate to English"
-                description="Translate selected Korean text to English">
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt T"/>
+        <!-- Alt+T: 즉시 번역 -->
+        <action id="TranslateKorean"
+                class="woowacourse.textTranslate.plugin.TranslateAction"
+                text="Translate Korean Word">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt T"/>
+            <add-to-group group-id="EditorActions" anchor="last"/>
         </action>
+
     </actions>
 </idea-plugin>
