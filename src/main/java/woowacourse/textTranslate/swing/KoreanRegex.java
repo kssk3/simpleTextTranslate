@@ -2,7 +2,7 @@ package woowacourse.textTranslate.swing;
 
 import java.util.regex.Pattern;
 
-public class KoreanRegex {
+public final class KoreanRegex {
 
     private static final String REGEX = "^[ㄱ-ㅎㅏ-ㅣ가-힁\\s]*$";
 
