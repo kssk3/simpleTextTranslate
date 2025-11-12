@@ -13,6 +13,8 @@ public class TranslateController {
     public TranslateController(TranslationService translationService, TranslatorGUI translatorGUI) {
         this.translationService = translationService;
         this.translatorGUI = translatorGUI;
+
+        translatorGUI.setTranslateButtonListener(this::handleTranslateButtonClick);
     }
 
     private void handleTranslateButtonClick() {

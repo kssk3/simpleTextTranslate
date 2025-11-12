@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import org.jetbrains.annotations.NotNull;
 
-public class TranslatorGUI extends JFrame {
+public class TranslatorGUI{
 
     private final JFrame frame;
     private final JTextField inputField;
@@ -85,6 +85,10 @@ public class TranslatorGUI extends JFrame {
         resultPanel.add(resultLabel, BorderLayout.NORTH);
         resultPanel.add(jScrollPane, BorderLayout.CENTER);
         return resultPanel;
+    }
+
+    public void setTranslateButtonListener(Runnable listener) {
+        translateButton.addActionListener(e -> listener.run());
     }
 
     public void displayError(String errorMessage) {
