@@ -1,15 +1,14 @@
 package woowacourse.textTranslate.swing;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -86,6 +85,14 @@ public class TranslatorGUI extends JFrame {
         resultPanel.add(resultLabel, BorderLayout.NORTH);
         resultPanel.add(jScrollPane, BorderLayout.CENTER);
         return resultPanel;
+    }
+
+    public void displayError(String errorMessage) {
+        JOptionPane.showMessageDialog(frame, errorMessage,"오류", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void displayResult(String result) {
+        resultArea.setText(result);
     }
 
     public String getInputText() {

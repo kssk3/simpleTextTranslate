@@ -1,5 +1,8 @@
 package woowacourse.textTranslate.swing.service;
 
+import woowacourse.textTranslate.swing.domain.KoreanText;
+import woowacourse.textTranslate.swing.domain.TargetText;
+
 public interface TranslationService {
-    String translate(String inputText, String targetLanguage);
+    String translate(KoreanText koreanText, TargetText targetLanguage);
 }
