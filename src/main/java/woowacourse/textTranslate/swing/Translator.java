@@ -1,16 +1,21 @@
 package woowacourse.textTranslate.swing;
 
+import woowacourse.textTranslate.swing.domain.KoreanText;
+import woowacourse.textTranslate.swing.domain.TargetText;
+import woowacourse.textTranslate.swing.service.TranslationService;
+
 public class Translator {
 
-    private KoreanText koreanText;
-    private TargetText targetText;
+    private final TranslationService translationService;
 
-    public Translator(KoreanText koreanText, TargetText targetText) {
-        this.koreanText = koreanText;
-        this.targetText = targetText;
+    public Translator(TranslationService translationService) {
+        this.translationService = translationService;
     }
 
-    public String translate() {
-        return null;
+    public String translate(KoreanText koreanText, TargetText targetText) {
+        String inputText = koreanText.getText();
+        String targetLanguage = targetText.getLanguage();
+
+        return translationService.translate(inputText, targetLanguage);
     }
 }

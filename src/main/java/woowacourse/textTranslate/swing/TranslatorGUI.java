@@ -88,4 +88,11 @@ public class TranslatorGUI extends JFrame {
         return resultPanel;
     }
 
+    public String getInputText() {
+        return inputField.getText().trim();
+    }
+
+    public void showGUI() {
+        frame.setVisible(true);
+    }
 }

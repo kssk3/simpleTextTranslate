@@ -1,4 +1,4 @@
-package woowacourse.textTranslate.swing;
+package woowacourse.textTranslate.swing.domain;
 
 import java.util.regex.Pattern;
 
