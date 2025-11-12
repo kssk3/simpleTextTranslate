@@ -2,24 +2,23 @@ package woowacourse.textTranslate.swing;
 
 public class TargetText {
 
-    private final String text;
+    private final String Language;
 
-    public TargetText(String text) {
-        validate(text);
-        this.text = text;
+    public TargetText(String Language) {
+        this.Language = Language;
     }
 
-    private void validate(String text) {
-        if (text == null || text.isEmpty()) {
-            throw new IllegalArgumentException("입력된 값이 없습니다.");
+    private void validate(String language) {
+        if(language == null ||  language.isEmpty()) {
+            throw new IllegalArgumentException("번역할 언어를 입력해주세요");
         }
 
-        if (KoreanRegex.isKoreanRegex(text)) {
-            throw new IllegalArgumentException("한글을 입력 받을 수 없습니다.");
+        if (KoreanRegex.isKoreanRegex(language)) {
+            throw new IllegalArgumentException("한국어로 번역할 수 없습니다.");
         }
     }
 
-    public String getText() {
-        return this.text;
+    public String getLanguage() {
+        return Language;
     }
 }
