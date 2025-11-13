@@ -1,17 +1,17 @@
 package woowacourse.textTranslate.swing.controller;
 
+import woowacourse.textTranslate.swing.Translator;
 import woowacourse.textTranslate.swing.TranslatorGUI;
 import woowacourse.textTranslate.swing.domain.KoreanText;
 import woowacourse.textTranslate.swing.domain.TargetText;
-import woowacourse.textTranslate.swing.service.TranslationService;
 
 public class TranslateController {
 
-    private final TranslationService translationService;
+    private final Translator translator;
     private final TranslatorGUI translatorGUI;
 
-    public TranslateController(TranslationService translationService, TranslatorGUI translatorGUI) {
-        this.translationService = translationService;
+    public TranslateController(Translator translator, TranslatorGUI translatorGUI) {
+        this.translator = translator;
         this.translatorGUI = translatorGUI;
 
         translatorGUI.setTranslateButtonListener(this::handleTranslateButtonClick);
@@ -28,7 +28,7 @@ public class TranslateController {
             KoreanText koreanText = new KoreanText(inputText);
             TargetText targetLanguage = new TargetText("English");
 
-            String translatedText = translationService.translate(koreanText, targetLanguage);
+            String translatedText = translator.translate(koreanText, targetLanguage);
 
             translatorGUI.displayResult(translatedText);
 
