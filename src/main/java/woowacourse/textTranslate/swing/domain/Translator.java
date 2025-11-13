@@ -1,7 +1,5 @@
-package woowacourse.textTranslate.swing;
+package woowacourse.textTranslate.swing.domain;
 
-import woowacourse.textTranslate.swing.domain.KoreanText;
-import woowacourse.textTranslate.swing.domain.TargetText;
 import woowacourse.textTranslate.swing.service.TranslationService;
 
 public class Translator {

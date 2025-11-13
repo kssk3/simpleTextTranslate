@@ -1,6 +1,7 @@
 plugins {
-	id 'java'
-	id 'org.jetbrains.intellij' version '1.17.2'
+    id 'java'
+    id 'application'
+    id 'org.jetbrains.intellij' version '1.17.2'
 }
 
 group = 'woowacourse'
@@ -8,44 +9,55 @@ version = '1.0.0'
 description = 'Text Translation Plugin for IntelliJ IDEA'
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 intellij {
-	version = '2023.2'
-	type = 'IC' // IntelliJ IDEA Community Edition
-	plugins = []
+    version = '2023.2'
+    type = 'IC' // IntelliJ IDEA Community Edition
+    plugins = []
 }
 
 dependencies {
-	// HTTP 통신을 위한 라이브러리
-	implementation 'com.squareup.okhttp3:okhttp:4.12.0'
-	// JSON 파싱을 위한 라이브러리
-	implementation 'com.google.code.gson:gson:2.10.1'
+    // HTTP 통신을 위한 라이브러리
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    // JSON 파싱을 위한 라이브러리
+    implementation 'com.google.code.gson:gson:2.10.1'
 
-	// JUnit5
-	testImplementation platform('org.junit:junit-bom:5.10.1')
-	testImplementation 'org.junit.jupiter:junit-jupiter'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // JUnit5
+    testImplementation platform('org.junit:junit-bom:5.10.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	// AssertJ
-	testImplementation 'org.assertj:assertj-core:3.24.2'
+    // AssertJ
+    testImplementation 'org.assertj:assertj-core:3.24.2'
 }
 
 patchPluginXml {
-	sinceBuild = '232'
-	untilBuild = '241.*'
+    sinceBuild = '232'
+    untilBuild = '241.*'
 }
 
 tasks.withType(JavaCompile) {
-	options.encoding = 'UTF-8'
+    options.encoding = 'UTF-8'
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
+}
+
+// Swing GUI 애플리케이션 실행 설정
+application {
+    mainClass = 'woowacourse.textTranslate.swing.Application'
+}
+
+// run 태스크 설정
+run {
+    // 환경 변수에서 API 키 읽기
+    environment 'KAKAO_API_KEY', System.getenv('KAKAO_API_KEY') ?: project.findProperty('kakaoApiKey') ?: ''
 }
