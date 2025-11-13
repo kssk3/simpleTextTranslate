@@ -24,4 +24,36 @@ class KoreanTextTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("한글과 특수문자가 포함된 입력은 통과")
+    @Test
+    void 한글과_특수문자가_포함된_입력은_통과() {
+        final KoreanText korean = new KoreanText("당신의 이름은 무엇입니까?");
+        assertThat(korean).isNotNull();
+        assertEquals(korean.getText(), "당신의 이름은 무엇입니까?");
+    }
+
+    @DisplayName("한글과 숫자가 포함된 입력은 통과")
+    @Test
+    void 한글과_숫자가_포함된_입력은_통과() {
+        final KoreanText korean = new KoreanText("나는 20살입니다");
+        assertThat(korean).isNotNull();
+        assertEquals(korean.getText(), "나는 20살입니다");
+    }
+
+    @DisplayName("한글, 숫자, 특수문자가 모두 포함된 입력은 통과")
+    @Test
+    void 한글_숫자_특수문자가_모두_포함된_입력은_통과() {
+        final KoreanText korean = new KoreanText("오늘은 2025년 1월 1일입니다!");
+        assertThat(korean).isNotNull();
+        assertEquals(korean.getText(), "오늘은 2025년 1월 1일입니다!");
+    }
+
+    @DisplayName("다양한 특수문자가 포함된 입력은 통과")
+    @Test
+    void 다양한_특수문자가_포함된_입력은_통과() {
+        final KoreanText korean = new KoreanText("안녕하세요! (반갑습니다) \"좋은 하루\", #해시태그");
+        assertThat(korean).isNotNull();
+        assertEquals(korean.getText(), "안녕하세요! (반갑습니다) \"좋은 하루\", #해시태그");
+    }
+
 }
