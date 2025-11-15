@@ -29,15 +29,12 @@ public class Application {
         // 1. 환경 변수에서 읽기 시도
         String apiKey = System.getenv(keyName);
         if (apiKey != null && !apiKey.isEmpty()) {
-            System.out.println("환경 변수에서 " + keyName + " 로드 성공");
             return apiKey;
         }
 
         // 2. .env 파일에서 읽기 시도 (dotenv 라이브러리 사용)
         try {
             String userDir = System.getProperty("user.dir");
-            System.out.println("현재 작업 디렉토리: " + userDir);
-
             // 여러 경로 시도
             String[] paths = {
                     ".",  // 프로젝트 루트
@@ -54,7 +51,6 @@ public class Application {
 
                     apiKey = dotenv.get(keyName);
                     if (apiKey != null && !apiKey.isEmpty()) {
-                        System.out.println(path + "/.env 에서 " + keyName + " 로드 성공!");
                         return apiKey;
                     }
                 } catch (Exception e) {
