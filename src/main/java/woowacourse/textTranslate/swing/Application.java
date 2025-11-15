@@ -1,8 +1,6 @@
 package woowacourse.textTranslate.swing;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import io.github.cdimascio.dotenv.Dotenv;
 import javax.swing.SwingUtilities;
 import woowacourse.textTranslate.swing.controller.TranslateController;
 import woowacourse.textTranslate.swing.domain.Translator;
@@ -10,6 +8,7 @@ import woowacourse.textTranslate.swing.service.PapagoTranslationService;
 import woowacourse.textTranslate.swing.view.TranslatorGUI;
 
 public class Application {
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             String clientId = loadApiKey("NAVER_CLIENT_ID");
@@ -30,40 +29,44 @@ public class Application {
         // 1. 환경 변수에서 읽기 시도
         String apiKey = System.getenv(keyName);
         if (apiKey != null && !apiKey.isEmpty()) {
+            System.out.println("환경 변수에서 " + keyName + " 로드 성공");
             return apiKey;
         }
 
-        // 2. .env 파일에서 읽기 시도
-        apiKey = loadFromEnvFile(keyName);
-        if (apiKey != null && !apiKey.isEmpty()) {
-            return apiKey;
-        }
+        // 2. .env 파일에서 읽기 시도 (dotenv 라이브러리 사용)
+        try {
+            String userDir = System.getProperty("user.dir");
+            System.out.println("현재 작업 디렉토리: " + userDir);
 
-        return null;
-    }
+            // 여러 경로 시도
+            String[] paths = {
+                    ".",  // 프로젝트 루트
+                    userDir,  // 절대 경로
+            };
 
-    private static String loadFromEnvFile(String keyName) {
-        try (InputStream inputStream = Application.class.getClassLoader().getResourceAsStream(".env")) {
-            if (inputStream == null) {
-                return null;
-            }
+            for (String path : paths) {
+                try {
+                    System.out.println(path + "/.env 파일 찾는 중...");
+                    Dotenv dotenv = Dotenv.configure()
+                            .directory(path)
+                            .ignoreIfMissing()
+                            .load();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                line = line.trim();
-                if (line.startsWith(keyName + "=")) {
-                    String value = line.substring((keyName + "=").length()).trim();
-                    // 따옴표 제거
-                    if (value.startsWith("\"") && value.endsWith("\"")) {
-                        value = value.substring(1, value.length() - 1);
+                    apiKey = dotenv.get(keyName);
+                    if (apiKey != null && !apiKey.isEmpty()) {
+                        System.out.println(path + "/.env 에서 " + keyName + " 로드 성공!");
+                        return apiKey;
                     }
-                    return value;
+                } catch (Exception e) {
+                    System.out.println(path + " 경로 실패: " + e.getMessage());
                 }
             }
         } catch (Exception e) {
             System.err.println(".env 파일 읽기 실패: " + e.getMessage());
+            e.printStackTrace();
         }
+
+        System.err.println(keyName + " 을(를) 찾을 수 없습니다.");
         return null;
     }
 }

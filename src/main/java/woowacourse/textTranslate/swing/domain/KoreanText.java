@@ -2,24 +2,24 @@ package woowacourse.textTranslate.swing.domain;
 
 public class KoreanText {
 
-    private final String text;
+    private final String koreanText;
 
-    public KoreanText(String text) {
-        validate(text);
-        this.text = text;
+    public KoreanText(String koreanText) {
+        validate(koreanText);
+        this.koreanText = koreanText;
     }
 
-    private void validate(String text) {
-        if (text == null || text.isEmpty()) {
+    private void validate(String koreanText) {
+        if (koreanText == null || koreanText.isEmpty()) {
             throw new IllegalArgumentException("입력된 값이 없습니다.");
         }
 
-        if (!KoreanRegex.isKoreanRegex(text)) {
+        if (!KoreanRegex.isKoreanRegex(koreanText)) {
             throw new IllegalArgumentException("입력된 값이 한글이 아닙니다.");
         }
     }
 
     public String getText() {
-        return this.text;
+        return this.koreanText;
     }
 }

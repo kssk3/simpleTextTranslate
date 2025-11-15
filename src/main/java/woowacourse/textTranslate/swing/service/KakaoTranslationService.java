@@ -42,9 +42,8 @@ public class KakaoTranslationService implements TranslationService {
             }
 
             String responseBody = response.body().string();
-            JsonParser jsonParser = new JsonParser();
             // Json 파싱
-            JsonObject jsonObject = jsonParser.parseString(responseBody).getAsJsonObject();
+            JsonObject jsonObject = JsonParser.parseString(responseBody).getAsJsonObject();
 
             String translatedText = jsonObject.getAsJsonArray("translated_text")
                     .get(0)

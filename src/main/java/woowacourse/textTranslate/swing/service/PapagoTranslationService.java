@@ -44,9 +44,8 @@ public class PapagoTranslationService implements TranslationService {
             }
 
             String responseBody = response.body().string();
-            JsonParser jsonParser = new JsonParser();
             // JSON 파싱
-            JsonObject jsonObject = jsonParser.parseString(responseBody).getAsJsonObject();
+            JsonObject jsonObject = JsonParser.parseString(responseBody).getAsJsonObject();
 
             String translatedText = jsonObject
                     .getAsJsonObject("message")

@@ -40,7 +40,7 @@ public class TranslatorGUI{
         // 메인 영역
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        BorderFactory.createEmptyBorder(20, 20, 20, 20);
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // 입력 영역
         JPanel inputPanel = createInputPanel();
