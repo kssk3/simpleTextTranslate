@@ -2,8 +2,8 @@ package woowacourse.textTranslate.swing.domain;
 
 public enum TargetLanguage {
     ENGLISH("en", "영어"),
-    JAPANESE("jp", "일본어"),
-    CHINESE("cn", "중국어");
+    JAPANESE("ja", "일본어"),
+    CHINESE("zh-CN", "중국어");
 
     private final String code;
     private final String displayName;

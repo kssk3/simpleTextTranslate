@@ -58,8 +58,3 @@ application {
     mainClass = 'woowacourse.textTranslate.swing.Application'
 }
 
-// run 태스크 설정
-run {
-    // 환경 변수에서 API 키 읽기
-    environment 'KAKAO_API_KEY', System.getenv('KAKAO_API_KEY') ?: project.findProperty('kakaoApiKey') ?: ''
-}

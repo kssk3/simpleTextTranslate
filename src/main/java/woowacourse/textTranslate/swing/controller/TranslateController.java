@@ -28,7 +28,7 @@ public class TranslateController {
 
             KoreanText koreanText = new KoreanText(inputText);
 
-            TargetText translatedText = translator.translate(koreanText, TargetLanguage.ENGLISH);
+            TargetText translatedText = translator.translate(koreanText, translatorGUI.getTargetLanguage());
 
             translatorGUI.displayResult(translatedText.getTranslatedText());
 
