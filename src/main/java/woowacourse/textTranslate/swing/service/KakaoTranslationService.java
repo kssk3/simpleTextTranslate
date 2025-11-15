@@ -8,6 +8,7 @@ import okhttp3.FormBody.Builder;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import woowacourse.textTranslate.swing.domain.TargetText;
 
 public class KakaoTranslationService implements TranslationService {
 
@@ -22,11 +23,11 @@ public class KakaoTranslationService implements TranslationService {
     }
 
     @Override
-    public String translate(String koreanText, String targetLanguage) {
+    public TargetText translate(String koreanText, String targetLanguageCode) {
         // Http 요청 바디 생성
         FormBody requestBody = new Builder()
                 .add("src_lang", "kr")
-                .add("target_lang", "en")
+                .add("target_lang", targetLanguageCode)
                 .add("query", koreanText)
                 .build();
 
@@ -53,7 +54,7 @@ public class KakaoTranslationService implements TranslationService {
                     .get("translated_text")
                     .getAsString();
 
-            return translatedText;
+            return new TargetText(translatedText);
         } catch (IOException e) {
             throw new RuntimeException("번역 API 통신 실패 : " + e.getMessage());
         }

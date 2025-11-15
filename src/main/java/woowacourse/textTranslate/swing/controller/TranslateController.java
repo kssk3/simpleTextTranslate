@@ -1,5 +1,6 @@
 package woowacourse.textTranslate.swing.controller;
 
+import woowacourse.textTranslate.swing.domain.TargetLanguage;
 import woowacourse.textTranslate.swing.domain.Translator;
 import woowacourse.textTranslate.swing.view.TranslatorGUI;
 import woowacourse.textTranslate.swing.domain.KoreanText;
@@ -26,11 +27,10 @@ public class TranslateController {
             }
 
             KoreanText koreanText = new KoreanText(inputText);
-            TargetText targetLanguage = new TargetText("English");
 
-            String translatedText = translator.translate(koreanText, targetLanguage);
+            TargetText translatedText = translator.translate(koreanText, TargetLanguage.ENGLISH);
 
-            translatorGUI.displayResult(translatedText);
+            translatorGUI.displayResult(translatedText.getTranslatedText());
 
         } catch (IllegalArgumentException e) {
             translatorGUI.displayError("입력 오류 : " + e.getMessage());

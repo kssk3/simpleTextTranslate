@@ -10,10 +10,10 @@ public class Translator {
         this.translationService = translationService;
     }
 
-    public String translate(KoreanText koreanText, TargetText targetText) {
+    public TargetText translate(KoreanText koreanText, TargetLanguage targetLanguage) {
         String inputText = koreanText.getText();
-        String targetLanguage = targetText.getLanguage();
+        String targetLanguageCode = targetLanguage.getCode();
 
-        return translationService.translate(inputText, targetLanguage);
+        return translationService.translate(inputText, targetLanguageCode);
     }
 }

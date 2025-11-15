@@ -7,6 +7,7 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import woowacourse.textTranslate.swing.domain.TargetText;
 
 public class PapagoTranslationService implements TranslationService {
 
@@ -23,11 +24,11 @@ public class PapagoTranslationService implements TranslationService {
     }
 
     @Override
-    public String translate(String koreanText, String targetLanguage) {
+    public TargetText translate(String koreanText, String targetLanguageCode) {
         // HTTP 요청 바디 생성
         FormBody requestBody = new FormBody.Builder()
                 .add("source", "ko")
-                .add("target", "en")
+                .add("target", targetLanguageCode)
                 .add("text", koreanText)
                 .build();
 
@@ -53,7 +54,7 @@ public class PapagoTranslationService implements TranslationService {
                     .get("translatedText")
                     .getAsString();
 
-            return translatedText;
+            return new TargetText(translatedText);
         } catch (IOException e) {
             throw new RuntimeException("번역 API 통신 실패 : " + e.getMessage());
         }
