@@ -20,6 +20,6 @@ public class KoreanText {
     }
 
     public String getText() {
-        return this.koreanText;
+        return this.koreanText.trim();
     }
 }

@@ -20,7 +20,7 @@ public class TargetText {
     }
 
     public String getTranslatedText() {
-        return this.translatedText;
+        return this.translatedText.trim();
     }
 
 }
