@@ -1,11 +1,10 @@
-package woowacourse.textTranslate.swing;
+package woowacourse.textTranslate.swing.domain;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import woowacourse.textTranslate.swing.domain.KoreanText;
 
 class KoreanTextTest {
 
@@ -55,5 +54,4 @@ class KoreanTextTest {
         assertThat(korean).isNotNull();
         assertEquals(korean.getText(), "안녕하세요! (반갑습니다) \"좋은 하루\", #해시태그");
     }
-
 }

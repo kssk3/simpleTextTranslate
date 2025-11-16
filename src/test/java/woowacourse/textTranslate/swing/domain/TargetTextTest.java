@@ -12,13 +12,21 @@ class TargetTextTest {
     @Test
     void 입력된_값이_영어가_맞으면_통과() {
         final TargetText targetText = new TargetText("English");
-        assertThat(targetText).isNotNull();
-        assertEquals(targetText.getLanguage(), "English");
+        assertNotNull(targetText);
+        assertEquals(targetText.getTranslatedText(), "English");
     }
 
-    @DisplayName("입력된 값이 영어가 아니면 예외를 던진다")
+    @DisplayName("입력된 값이 한글이 아니면 통과")
     @Test
-    void 입력된_값이_영어가_아니면_예외를_던진다() {
+    void 입력된_값이_한글이_아니면_통과() {
+        final TargetText targetText = new TargetText("おはよう");
+        assertThat(targetText).isNotNull();
+        assertEquals(targetText.getTranslatedText(), "おはよう");
+    }
+
+    @DisplayName("입력된 값이 한글이면 예외를 던진다")
+    @Test
+    void 입력된_값이_한글이면_예외를_던진다() {
         assertThatThrownBy(() -> new TargetText("한글"))
                 .isInstanceOf(IllegalArgumentException.class);
     }

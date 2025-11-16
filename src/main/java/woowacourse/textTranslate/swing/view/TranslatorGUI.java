@@ -23,13 +23,14 @@ public class TranslatorGUI {
     private final JTextField inputField;
     private final JButton translateButton;
     private final JTextArea resultArea;
-    private JComboBox<TargetLanguage> targetLanguageComboBox;
+    private final JComboBox<TargetLanguage> targetLanguageComboBox;
 
     public TranslatorGUI() {
         this.frame = new JFrame("간단한 한글-영어 번역기");
         this.inputField = new JTextField(30);
         this.translateButton = new JButton("번역하기");
         this.resultArea = new JTextArea(10, 30);
+        this.targetLanguageComboBox = new JComboBox<>(TargetLanguage.values());
 
         init();
     }
@@ -69,7 +70,6 @@ public class TranslatorGUI {
     private @NotNull JPanel createLanguagePanel() {
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.add(new JLabel("번역할 언어 "));
-        targetLanguageComboBox = new JComboBox<>(TargetLanguage.values());
         topPanel.add(targetLanguageComboBox);
         return topPanel;
     }
