@@ -30,4 +30,12 @@ class TargetTextTest {
         assertThatThrownBy(() -> new TargetText("한글"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("숫자_특수문자가_모두_포함된_입력은_통과")
+    @Test
+    void 숫자_특수문자가_모두_포홤된_입력은_통과() {
+        final TargetText targetText = new TargetText("English_123");
+        assertThat(targetText).isNotNull();
+        assertThat(targetText.getTranslatedText()).isEqualTo("English_123");
+    }
 }
