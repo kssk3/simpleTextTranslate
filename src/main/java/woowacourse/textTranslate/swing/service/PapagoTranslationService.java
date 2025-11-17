@@ -4,8 +4,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 import woowacourse.textTranslate.swing.domain.TargetText;
@@ -13,6 +15,7 @@ import woowacourse.textTranslate.swing.domain.TargetText;
 public class PapagoTranslationService implements TranslationService {
 
     private static final String API_URL = "https://papago.apigw.ntruss.com/nmt/v1/translation";
+    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final String SOURCE_LANGUAGE = "ko";
 
     private final OkHttpClient client;
@@ -30,7 +33,8 @@ public class PapagoTranslationService implements TranslationService {
     public TargetText translate(String koreanText, String targetLanguageCode) {
         validateTranslateParam(koreanText,targetLanguageCode);
 
-        FormBody requestBody = buildRequestBody(koreanText, targetLanguageCode);
+//        FormBody requestBody = buildRequestBody(koreanText, targetLanguageCode);
+        RequestBody requestBody = buildRequestBody(koreanText, targetLanguageCode);
         Request request = buildRequest(requestBody);
 
         try (Response response = client.newCall(request).execute()) {
@@ -40,16 +44,36 @@ public class PapagoTranslationService implements TranslationService {
         }
     }
 
-    private static @NotNull FormBody buildRequestBody(String koreanText, String targetLanguageCode) {
-        FormBody requestBody = new FormBody.Builder()
-                .add("source", SOURCE_LANGUAGE)
-                .add("target", targetLanguageCode)
-                .add("text", koreanText)
-                .build();
-        return requestBody;
+//    private static @NotNull FormBody buildRequestBody(String koreanText, String targetLanguageCode) {
+//        FormBody requestBody = new FormBody.Builder()
+//                .add("source", SOURCE_LANGUAGE)
+//                .add("target", targetLanguageCode)
+//                .add("text", koreanText)
+//                .build();
+//        return requestBody;
+//    }
+
+//    TODO Json 방식
+    private static RequestBody buildRequestBody(String koreanText, String targetLanguageCode) {
+        JsonObject json = new JsonObject();
+        json.addProperty("source", SOURCE_LANGUAGE);
+        json.addProperty("target", targetLanguageCode);
+        json.addProperty("text", koreanText);
+
+        return RequestBody.create(json.toString(), JSON);
     }
 
-    private @NotNull Request buildRequest(FormBody requestBody) {
+//    private @NotNull Request buildRequest(FormBody requestBody) {
+//        Request request = new Request.Builder()
+//                .url(API_URL)
+//                .header("X-NCP-APIGW-API-KEY-ID", clientId)
+//                .header("X-NCP-APIGW-API-KEY", clientSecret)
+//                .post(requestBody)
+//                .build();
+//        return request;
+//    }
+
+    private @NotNull Request buildRequest(RequestBody requestBody) {
         Request request = new Request.Builder()
                 .url(API_URL)
                 .header("X-NCP-APIGW-API-KEY-ID", clientId)
