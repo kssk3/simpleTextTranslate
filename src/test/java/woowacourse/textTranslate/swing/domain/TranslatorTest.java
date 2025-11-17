@@ -9,7 +9,7 @@ import woowacourse.textTranslate.swing.service.TranslationService;
 class TranslatorTest {
 
     /**
-     * Spring Boot의 Mock을 사용하지 않고 람다로 테스트하기
+     * Spring Boot의 Mock을 사용하지 않고 람다 익명 함수로 테스트하기
      */
     @DisplayName("번역될 언어가 일본어면 통과")
     @Test
@@ -34,9 +34,7 @@ class TranslatorTest {
     @Test
     void 한국어가_아닌_입력값으로_번역_시도하면_예외_발생() {
         // given
-        TranslationService mockService = (text, lang) -> {
-            return new TargetText("Hello");
-        };
+        TranslationService mockService = (text, lang) -> new TargetText("Hello");
 
         // when
         Translator translator = new Translator(mockService);

@@ -1,6 +1,5 @@
 package woowacourse.textTranslate.swing.controller;
 
-import woowacourse.textTranslate.swing.domain.TargetLanguage;
 import woowacourse.textTranslate.swing.domain.Translator;
 import woowacourse.textTranslate.swing.view.TranslatorGUI;
 import woowacourse.textTranslate.swing.domain.KoreanText;
