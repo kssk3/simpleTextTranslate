@@ -1,6 +1,7 @@
 package woowacourse.textTranslate.swing.controller;
 
 import woowacourse.textTranslate.swing.domain.Translator;
+import woowacourse.textTranslate.swing.error.ErrorMessage;
 import woowacourse.textTranslate.swing.view.TranslatorGUI;
 import woowacourse.textTranslate.swing.domain.KoreanText;
 import woowacourse.textTranslate.swing.domain.TargetText;
@@ -22,7 +23,7 @@ public class GuiTranslateController {
             String inputText = translatorGUI.getInputText();
 
             if (inputText == null || inputText.isEmpty()) {
-                translatorGUI.displayError("번역할 한글을 입력해주세요");
+                translatorGUI.displayError(ErrorMessage.INVALID_TEXT_INPUT.getMessage());
             }
 
             KoreanText koreanText = new KoreanText(inputText);

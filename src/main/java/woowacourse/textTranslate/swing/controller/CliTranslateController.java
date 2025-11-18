@@ -1,6 +1,9 @@
 package woowacourse.textTranslate.swing.controller;
 
+import woowacourse.textTranslate.swing.domain.KoreanText;
+import woowacourse.textTranslate.swing.domain.TargetText;
 import woowacourse.textTranslate.swing.domain.Translator;
+import woowacourse.textTranslate.swing.error.ErrorMessage;
 import woowacourse.textTranslate.swing.view.TranslatorCLI;
 
 public class CliTranslateController {
@@ -13,10 +16,19 @@ public class CliTranslateController {
         this.translatorCLI = translatorCLI;
     }
 
-    public void showWellComeMessage() {
-        System.out.println("╔═══════════════════════════════════╗");
-        System.out.println("║   한글-영어 번역기 (CLI 버전)    ║");
-        System.out.println("╚═══════════════════════════════════╝");
-        System.out.println();
+    public void start() {
+        translatorCLI.showWellComeMessage();
+
+        String inputText = translatorCLI.getInputText();
+
+        if(inputText == null || inputText.isEmpty()){
+            translatorCLI.displayError(ErrorMessage.INVALID_TEXT_INPUT.getMessage());
+        }
+
+        KoreanText koreanText = new KoreanText(inputText);
+
+        TargetText translatedText = translator.translate(koreanText, translatorCLI.getTargetLanguage());
+
+        translatorCLI.displayResult(translatedText.getTranslatedText());
     }
 }
