@@ -1,4 +1,4 @@
-package woowacourse.textTranslate.plugin;
+package woowacourse.plugin;
 
 import okhttp3.OkHttpClient;
 

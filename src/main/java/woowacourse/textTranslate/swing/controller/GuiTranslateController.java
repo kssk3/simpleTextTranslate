@@ -5,12 +5,12 @@ import woowacourse.textTranslate.swing.view.TranslatorGUI;
 import woowacourse.textTranslate.swing.domain.KoreanText;
 import woowacourse.textTranslate.swing.domain.TargetText;
 
-public class TranslateController {
+public class GuiTranslateController {
 
     private final Translator translator;
     private final TranslatorGUI translatorGUI;
 
-    public TranslateController(Translator translator, TranslatorGUI translatorGUI) {
+    public GuiTranslateController(Translator translator, TranslatorGUI translatorGUI) {
         this.translator = translator;
         this.translatorGUI = translatorGUI;
 

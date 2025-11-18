@@ -19,13 +19,13 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- TranslatorSettings 서비스 등록 -->
-        <applicationService serviceImplementation="woowacourse.textTranslate.plugin.TranslatorSettings"/>
+        <applicationService serviceImplementation="woowacourse.plugin.TranslatorSettings"/>
     </extensions>
 
     <actions>
         <!-- Alt+T: 즉시 번역 -->
         <action id="TranslateKorean"
-                class="woowacourse.textTranslate.plugin.TranslateAction"
+                class="woowacourse.plugin.TranslateAction"
                 text="Translate Korean Word">
             <keyboard-shortcut keymap="$default" first-keystroke="alt T"/>
             <add-to-group group-id="EditorActions" anchor="last"/>

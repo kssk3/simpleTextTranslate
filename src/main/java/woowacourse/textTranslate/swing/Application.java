@@ -2,7 +2,7 @@ package woowacourse.textTranslate.swing;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import javax.swing.SwingUtilities;
-import woowacourse.textTranslate.swing.controller.TranslateController;
+import woowacourse.textTranslate.swing.controller.GuiTranslateController;
 import woowacourse.textTranslate.swing.domain.Translator;
 import woowacourse.textTranslate.swing.service.PapagoTranslationService;
 import woowacourse.textTranslate.swing.view.TranslatorGUI;
@@ -20,7 +20,7 @@ public class Application {
 
             PapagoTranslationService papagoTranslationService = new PapagoTranslationService(clientId, clientSecret);
             Translator translator = new Translator(papagoTranslationService);
-            TranslateController translateController = new TranslateController(translator, new TranslatorGUI());
+            GuiTranslateController translateController = new GuiTranslateController(translator, new TranslatorGUI());
             translateController.start();
         });
     }
@@ -43,7 +43,6 @@ public class Application {
 
             for (String path : paths) {
                 try {
-                    System.out.println(path + "/.env 파일 찾는 중...");
                     Dotenv dotenv = Dotenv.configure()
                             .directory(path)
                             .ignoreIfMissing()
@@ -61,7 +60,6 @@ public class Application {
             System.err.println(".env 파일 읽기 실패: " + e.getMessage());
             e.printStackTrace();
         }
-
         System.err.println(keyName + " 을(를) 찾을 수 없습니다.");
         return null;
     }
