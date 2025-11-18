@@ -20,6 +20,11 @@ public class TranslatorCLI {
         System.out.println();
     }
 
+    public String getInputText() {
+        System.out.println("번역할 한글 텍스트를 입력하세요: ");
+        return scanner.nextLine().trim();
+    }
+
     public TargetLanguage getTargetLanguage() {
         System.out.println("번역할 언어를 선택하세요:");
         System.out.println("1. 영어 (English)");
@@ -45,9 +50,10 @@ public class TranslatorCLI {
         };
     }
 
-    public String getInputText() {
-        System.out.println("번역할 한글 텍스트를 입력하세요: ");
-        return scanner.nextLine().trim();
+    public boolean askContinue() {
+        System.out.print("계속 번역하시겠습니까? (y/n): ");
+        String response = scanner.nextLine().trim().toLowerCase();
+        return response.equals("y") || response.equals("yes");
     }
 
     public void displayError(String errorMessage) {
@@ -60,5 +66,10 @@ public class TranslatorCLI {
         System.out.println("📝 번역 결과:");
         System.out.println(translatedText);
         System.out.println("─────────────────────────────────\n");
+    }
+
+    public void close() {
+        System.out.println("프로그램을 종료하겠습니다.");
+        scanner.close();
     }
 }

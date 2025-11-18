@@ -19,9 +19,23 @@ public class CliTranslateController {
     public void start() {
         translatorCLI.showWellComeMessage();
 
+        boolean shouldContinue = true;
+        while (shouldContinue) {
+            try {
+                handleTranslation();
+            } catch (IllegalArgumentException e) {
+                translatorCLI.displayError(e.getMessage());
+            }
+            shouldContinue = translatorCLI.askContinue();
+        }
+
+        translatorCLI.close();
+    }
+
+    private void handleTranslation() {
         String inputText = translatorCLI.getInputText();
 
-        if(inputText == null || inputText.isEmpty()){
+        if (inputText == null || inputText.isEmpty()) {
             translatorCLI.displayError(ErrorMessage.INVALID_TEXT_INPUT.getMessage());
         }
 
