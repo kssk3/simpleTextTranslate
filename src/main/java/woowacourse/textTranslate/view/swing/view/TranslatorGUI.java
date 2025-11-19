@@ -1,4 +1,4 @@
-package woowacourse.textTranslate.swing.view;
+package woowacourse.textTranslate.view.swing.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import org.jetbrains.annotations.NotNull;
-import woowacourse.textTranslate.swing.domain.TargetLanguage;
+import woowacourse.textTranslate.domain.TargetLanguage;
 
 public class TranslatorGUI {
 

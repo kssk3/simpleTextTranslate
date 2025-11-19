@@ -1,4 +1,4 @@
-package woowacourse.textTranslate.swing.error;
+package woowacourse.textTranslate.error;
 
 public enum ErrorMessage {
     INVALID_TEXT_INPUT("번역할 한글을 입력해주세요"),

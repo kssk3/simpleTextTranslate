@@ -1,4 +1,4 @@
-package woowacourse.textTranslate.swing.domain;
+package woowacourse.textTranslate.domain;
 
 public enum TargetLanguage {
     ENGLISH("en", "영어"),

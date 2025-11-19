@@ -1,4 +1,4 @@
-package woowacourse.textTranslate.swing.service;
+package woowacourse.textTranslate.service;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -8,7 +8,7 @@ import okhttp3.FormBody.Builder;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import woowacourse.textTranslate.swing.domain.TargetText;
+import woowacourse.textTranslate.domain.TargetText;
 
 public class KakaoTranslationService implements TranslationService {
 

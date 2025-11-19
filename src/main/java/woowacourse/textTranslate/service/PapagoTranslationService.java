@@ -1,16 +1,15 @@
-package woowacourse.textTranslate.swing.service;
+package woowacourse.textTranslate.service;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
-import woowacourse.textTranslate.swing.domain.TargetText;
+import woowacourse.textTranslate.domain.TargetText;
 
 public class PapagoTranslationService implements TranslationService {
 

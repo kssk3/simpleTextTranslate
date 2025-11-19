@@ -1,4 +1,4 @@
-package woowacourse.textTranslate.swing.domain;
+package woowacourse.textTranslate.domain;
 
 public class TargetText {
 

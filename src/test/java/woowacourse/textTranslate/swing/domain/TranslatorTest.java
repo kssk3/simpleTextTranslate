@@ -4,7 +4,11 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import woowacourse.textTranslate.swing.service.TranslationService;
+import woowacourse.textTranslate.domain.KoreanText;
+import woowacourse.textTranslate.domain.TargetLanguage;
+import woowacourse.textTranslate.domain.TargetText;
+import woowacourse.textTranslate.domain.Translator;
+import woowacourse.textTranslate.service.TranslationService;
 
 class TranslatorTest {
 

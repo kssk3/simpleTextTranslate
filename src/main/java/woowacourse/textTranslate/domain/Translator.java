@@ -1,6 +1,6 @@
-package woowacourse.textTranslate.swing.domain;
+package woowacourse.textTranslate.domain;
 
-import woowacourse.textTranslate.swing.service.TranslationService;
+import woowacourse.textTranslate.service.TranslationService;
 
 public class Translator {
 

@@ -1,9 +1,8 @@
-package woowacourse.textTranslate.swing.view;
+package woowacourse.textTranslate.view.cli.view;
 
 import java.util.Scanner;
-import org.jetbrains.annotations.NotNull;
-import woowacourse.textTranslate.swing.domain.TargetLanguage;
-import woowacourse.textTranslate.swing.error.ErrorMessage;
+import woowacourse.textTranslate.domain.TargetLanguage;
+import woowacourse.textTranslate.error.ErrorMessage;
 
 public class TranslatorCLI {
 

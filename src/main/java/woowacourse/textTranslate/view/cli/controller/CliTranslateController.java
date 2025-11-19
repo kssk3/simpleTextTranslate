@@ -1,10 +1,10 @@
-package woowacourse.textTranslate.swing.controller;
+package woowacourse.textTranslate.view.cli.controller;
 
-import woowacourse.textTranslate.swing.domain.KoreanText;
-import woowacourse.textTranslate.swing.domain.TargetText;
-import woowacourse.textTranslate.swing.domain.Translator;
-import woowacourse.textTranslate.swing.error.ErrorMessage;
-import woowacourse.textTranslate.swing.view.TranslatorCLI;
+import woowacourse.textTranslate.domain.KoreanText;
+import woowacourse.textTranslate.domain.TargetText;
+import woowacourse.textTranslate.domain.Translator;
+import woowacourse.textTranslate.error.ErrorMessage;
+import woowacourse.textTranslate.view.cli.view.TranslatorCLI;
 
 public class CliTranslateController {
 

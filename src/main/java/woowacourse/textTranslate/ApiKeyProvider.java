@@ -1,46 +1,23 @@
-package woowacourse.textTranslate.swing;
+package woowacourse.textTranslate;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import javax.swing.SwingUtilities;
-import woowacourse.textTranslate.swing.controller.CliTranslateController;
-import woowacourse.textTranslate.swing.controller.GuiTranslateController;
-import woowacourse.textTranslate.swing.domain.Translator;
-import woowacourse.textTranslate.swing.error.ErrorMessage;
-import woowacourse.textTranslate.swing.service.PapagoTranslationService;
-import woowacourse.textTranslate.swing.view.TranslatorCLI;
-import woowacourse.textTranslate.swing.view.TranslatorGUI;
+import woowacourse.textTranslate.error.ErrorMessage;
 
-public class Application {
+public class ApiKeyProvider {
 
-    public static void main(String[] args) {
-        String clientId = loadApiKey("NAVER_CLIENT_ID");
-        String clientSecret = loadApiKey("NAVER_CLIENT_SECRET");
+    private final String clientId;
+    private final String clientSecret;;
 
+    public ApiKeyProvider() {
+        this.clientId = loadApiKey("NAVER_CLIENT_ID");
+        this.clientSecret = loadApiKey("NAVER_CLIENT_SECRET");
         validateApiKey(clientId, clientSecret);
-
-        PapagoTranslationService papagoTranslationService = new PapagoTranslationService(clientId, clientSecret);
-        Translator translator = new Translator(papagoTranslationService);
-
-        runCliMode(translator); // CLI 기반 테스트
-//        runGuiMode(translator); // GUI 기반 테스트
     }
 
     private static void validateApiKey(String clientId, String clientSecret) {
         if (clientId == null || clientId.isEmpty() || clientSecret == null || clientSecret.isEmpty()) {
             throw new RuntimeException(ErrorMessage.INVALID_NAVER_CLIENT_API.getMessage());
         }
-    }
-
-    private static void runCliMode(Translator translator) {
-        CliTranslateController cliTranslateController = new CliTranslateController(translator, new TranslatorCLI());
-        cliTranslateController.start();
-    }
-
-    private static void runGuiMode(Translator translator) {
-        SwingUtilities.invokeLater(() -> {
-            GuiTranslateController translateController = new GuiTranslateController(translator, new TranslatorGUI());
-            translateController.start();
-        });
     }
 
     private static String loadApiKey(String keyName) {
@@ -80,5 +57,13 @@ public class Application {
         }
         System.err.println(keyName + " 을(를) 찾을 수 없습니다.");
         return null;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
     }
 }

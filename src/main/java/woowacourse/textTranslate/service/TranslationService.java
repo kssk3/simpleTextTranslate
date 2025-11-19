@@ -1,6 +1,6 @@
-package woowacourse.textTranslate.swing.service;
+package woowacourse.textTranslate.service;
 
-import woowacourse.textTranslate.swing.domain.TargetText;
+import woowacourse.textTranslate.domain.TargetText;
 
 @FunctionalInterface
 public interface TranslationService {
