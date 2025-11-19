@@ -1,5 +1,7 @@
 package woowacourse.textTranslate.domain;
 
+import woowacourse.textTranslate.error.ErrorMessage;
+
 public class KoreanText {
 
     private final String koreanText;
@@ -11,11 +13,11 @@ public class KoreanText {
 
     private void validate(String koreanText) {
         if (koreanText == null || koreanText.isEmpty()) {
-            throw new IllegalArgumentException("입력된 값이 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_TEXT_INPUT.getMessage());
         }
 
         if (!KoreanRegex.isKoreanRegex(koreanText)) {
-            throw new IllegalArgumentException("입력된 값이 한글이 아닙니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NOT_KOREAN_TEXT_INPUT.getMessage());
         }
     }
 

@@ -8,7 +8,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.jetbrains.annotations.NotNull;
 import woowacourse.textTranslate.domain.TargetText;
 
 public class PapagoTranslationService implements TranslationService {
@@ -30,7 +29,7 @@ public class PapagoTranslationService implements TranslationService {
 
     @Override
     public TargetText translate(String koreanText, String targetLanguageCode) {
-        validateTranslateParam(koreanText,targetLanguageCode);
+        validateTranslateParam(koreanText, targetLanguageCode);
 
 //        FormBody requestBody = buildRequestBody(koreanText, targetLanguageCode);
         RequestBody requestBody = buildRequestBody(koreanText, targetLanguageCode);
@@ -52,7 +51,7 @@ public class PapagoTranslationService implements TranslationService {
 //        return requestBody;
 //    }
 
-//    TODO Json 방식
+    //    TODO Json 방식
     private static RequestBody buildRequestBody(String koreanText, String targetLanguageCode) {
         JsonObject json = new JsonObject();
         json.addProperty("source", SOURCE_LANGUAGE);
@@ -72,7 +71,7 @@ public class PapagoTranslationService implements TranslationService {
 //        return request;
 //    }
 
-    private @NotNull Request buildRequest(RequestBody requestBody) {
+    private Request buildRequest(RequestBody requestBody) {
         Request request = new Request.Builder()
                 .url(API_URL)
                 .header("X-NCP-APIGW-API-KEY-ID", clientId)
@@ -82,7 +81,7 @@ public class PapagoTranslationService implements TranslationService {
         return request;
     }
 
-    private static @NotNull TargetText parseResponse(Response response) throws IOException {
+    private static TargetText parseResponse(Response response) throws IOException {
         if (!response.isSuccessful()) {
             throw new RuntimeException("API 호출 실패 : " + response.code());
         }
