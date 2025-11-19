@@ -1,4 +1,4 @@
-package woowacourse.textTranslate;
+package woowacourse.textTranslate.controller;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import woowacourse.textTranslate.error.ErrorMessage;
