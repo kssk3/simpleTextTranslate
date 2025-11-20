@@ -3,6 +3,7 @@ package woowacourse.textTranslate.service;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
+import java.util.Optional;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -101,12 +102,11 @@ public class PapagoTranslationService implements TranslationService {
     private static String extractTranslateText(String responseBody) {
         JsonObject jsonObject = JsonParser.parseString(responseBody).getAsJsonObject();
 
-        String translatedText = jsonObject
-                .getAsJsonObject("message")
-                .getAsJsonObject("result")
-                .get("translatedText")
-                .getAsString();
-        return translatedText;
+        return Optional.ofNullable(jsonObject.getAsJsonObject("message"))
+                .map(message -> message.getAsJsonObject("result"))
+                .map(result -> result.get("translatedText"))
+                .map(element -> element.getAsString())
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.RESPONSE_BODY_EMPTY.getMessage()));
     }
 
     private void validate(String clientId, String clientSecret) {
