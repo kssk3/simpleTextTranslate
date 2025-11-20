@@ -8,7 +8,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import woowacourse.textTranslate.domain.TargetText;
+import woowacourse.textTranslate.error.ErrorMessage;
 
 public class PapagoTranslationService implements TranslationService {
 
@@ -86,9 +88,12 @@ public class PapagoTranslationService implements TranslationService {
             throw new RuntimeException("API 호출 실패 : " + response.code());
         }
 
-        String responseBody = response.body().string();
+        ResponseBody body = response.body();
+        if (body == null) {
+            throw new IllegalArgumentException(ErrorMessage.RESPONSE_BODY_EMPTY.getMessage());
+        }
         // JSON 파싱
-        String translatedText = extractTranslateText(responseBody);
+        String translatedText = extractTranslateText(body.string());
 
         return new TargetText(translatedText);
     }
@@ -106,20 +111,20 @@ public class PapagoTranslationService implements TranslationService {
 
     private void validate(String clientId, String clientSecret) {
         if (clientId == null || clientId.isEmpty()) {
-            throw new IllegalArgumentException("Client ID가 설정되지 않았습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NAVER_CLIENT_ID.getMessage());
         }
         if (clientSecret == null || clientSecret.isEmpty()) {
-            throw new IllegalArgumentException("Client Secret이 설정되지 않았습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NAVER_CLIENT_SECRET.getMessage());
         }
     }
 
     private void validateTranslateParam(String koreanText, String targetLanguageCode) {
         if (koreanText == null || koreanText.isEmpty()) {
-            throw new IllegalArgumentException("번역할 텍스트가 비어있습니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_TEXT_INPUT.getMessage());
         }
 
         if (targetLanguageCode == null || targetLanguageCode.isEmpty()) {
-            throw new IllegalArgumentException("목표 언어가 비어있습니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_CHOICE_LANGUAGE.getMessage());
         }
     }
 }

@@ -26,7 +26,7 @@ public class KakaoTranslationService implements TranslationService {
     public TargetText translate(String koreanText, String targetLanguageCode) {
         // Http 요청 바디 생성
         FormBody requestBody = new Builder()
-                .add("src_lang", "kr")
+                .add("src_lang", "ko")
                 .add("target_lang", targetLanguageCode)
                 .add("query", koreanText)
                 .build();

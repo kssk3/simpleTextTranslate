@@ -6,7 +6,7 @@ import woowacourse.textTranslate.error.ErrorMessage;
 public class ApiKeyProvider {
 
     private final String clientId;
-    private final String clientSecret;;
+    private final String clientSecret;
 
     public ApiKeyProvider() {
         this.clientId = loadApiKey("NAVER_CLIENT_ID");

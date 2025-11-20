@@ -3,7 +3,6 @@ package woowacourse.textTranslate.view.cli.controller;
 import woowacourse.textTranslate.domain.KoreanText;
 import woowacourse.textTranslate.domain.TargetText;
 import woowacourse.textTranslate.domain.Translator;
-import woowacourse.textTranslate.error.ErrorMessage;
 import woowacourse.textTranslate.view.cli.view.TranslatorCLI;
 
 public class CliTranslateController {
@@ -34,11 +33,6 @@ public class CliTranslateController {
 
     private void handleTranslation() {
         String inputText = translatorCLI.getInputText();
-
-        if (inputText == null || inputText.isEmpty()) {
-            translatorCLI.displayError(ErrorMessage.INVALID_TEXT_INPUT.getMessage());
-        }
-
         KoreanText koreanText = new KoreanText(inputText);
 
         TargetText translatedText = translator.translate(koreanText, translatorCLI.getTargetLanguage());

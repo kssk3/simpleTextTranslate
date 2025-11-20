@@ -33,9 +33,9 @@ public class GuiTranslateController {
             translatorGUI.displayResult(translatedText.getTranslatedText());
 
         } catch (IllegalArgumentException e) {
-            translatorGUI.displayError("입력 오류 : " + e.getMessage());
+            translatorGUI.displayError(ErrorMessage.INVALID_TEXT_INPUT.getMessage());
         } catch (Exception e) {
-            translatorGUI.displayError("번역 실패 : " + e.getMessage());
+            translatorGUI.displayError(ErrorMessage.INVALID_TRANSLATION_FAILED.getMessage());
         }
 
     }
