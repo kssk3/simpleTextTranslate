@@ -5,7 +5,6 @@ import woowacourse.textTranslate.domain.TargetLanguage;
 import woowacourse.textTranslate.error.ErrorMessage;
 
 public class TranslatorCLI {
-
     private final Scanner scanner;
 
     public TranslatorCLI() {
