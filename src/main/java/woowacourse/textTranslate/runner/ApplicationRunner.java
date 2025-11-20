@@ -1,21 +1,20 @@
-package woowacourse.textTranslate.controller;
+package woowacourse.textTranslate.runner;
 
 import javax.swing.SwingUtilities;
-import woowacourse.textTranslate.domain.ApplicationMode;
-import woowacourse.textTranslate.domain.ModeSelector;
+import woowacourse.textTranslate.view.ApplicationMode;
+import woowacourse.textTranslate.view.ModeSelector;
 import woowacourse.textTranslate.domain.Translator;
-import woowacourse.textTranslate.error.ErrorMessage;
 import woowacourse.textTranslate.view.cli.controller.CliTranslateController;
 import woowacourse.textTranslate.view.cli.view.TranslatorCLI;
 import woowacourse.textTranslate.view.swing.controller.GuiTranslateController;
 import woowacourse.textTranslate.view.swing.view.TranslatorGUI;
 
-public class ApplicationController {
+public class ApplicationRunner {
 
     private final Translator translator;
     private final ModeSelector modeSelector;
 
-    public ApplicationController(Translator translator, ModeSelector modeSelector) {
+    public ApplicationRunner(Translator translator, ModeSelector modeSelector) {
         this.translator = translator;
         this.modeSelector = modeSelector;
     }

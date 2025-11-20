@@ -1,4 +1,4 @@
-package woowacourse.textTranslate.domain;
+package woowacourse.textTranslate.view;
 
 import java.util.Scanner;
 import woowacourse.textTranslate.error.ErrorMessage;

@@ -1,6 +1,6 @@
-package woowacourse.textTranslate.domain;
+package woowacourse.textTranslate.config;
 
-import woowacourse.textTranslate.controller.ApiKeyProvider;
+import woowacourse.textTranslate.domain.Translator;
 import woowacourse.textTranslate.service.PapagoTranslationService;
 
 public class TranslatorFactory {

@@ -1,9 +1,9 @@
 package woowacourse.textTranslate;
 
-import woowacourse.textTranslate.controller.ApiKeyProvider;
-import woowacourse.textTranslate.controller.ApplicationController;
-import woowacourse.textTranslate.domain.ModeSelector;
-import woowacourse.textTranslate.domain.TranslatorFactory;
+import woowacourse.textTranslate.config.ApiKeyProvider;
+import woowacourse.textTranslate.runner.ApplicationRunner;
+import woowacourse.textTranslate.view.ModeSelector;
+import woowacourse.textTranslate.config.TranslatorFactory;
 import woowacourse.textTranslate.domain.Translator;
 
 public class Application {
@@ -15,9 +15,8 @@ public class Application {
         Translator translator = translatorFactory.createTranslator();
 
         ModeSelector modeSelector = new ModeSelector();
-        modeSelector.close();
 
-        ApplicationController controller = new ApplicationController(translator, modeSelector);
+        ApplicationRunner controller = new ApplicationRunner(translator, modeSelector);
         controller.run();
     }
 }

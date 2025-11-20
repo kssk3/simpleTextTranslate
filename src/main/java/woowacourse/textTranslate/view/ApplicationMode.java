@@ -1,4 +1,4 @@
-package woowacourse.textTranslate.domain;
+package woowacourse.textTranslate.view;
 
 public enum ApplicationMode {
     GUI,CLI;
