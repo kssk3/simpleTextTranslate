@@ -8,6 +8,7 @@ public class TranslatorFactory {
     private final ApiKeyProvider apiKeyProvider;
 
     public TranslatorFactory(ApiKeyProvider apiKeyProvider) {
+        validate(apiKeyProvider);
         this.apiKeyProvider = apiKeyProvider;
     }
 
@@ -15,5 +16,11 @@ public class TranslatorFactory {
         String clientId = apiKeyProvider.getClientId();
         String clientSecret = apiKeyProvider.getClientSecret();
         return new Translator(new PapagoTranslationService(clientId, clientSecret));
+    }
+
+    private void validate(ApiKeyProvider apiKeyProvider) {
+        if(apiKeyProvider == null) {
+            throw new NullPointerException("apiKeyProvider is null");
+        }
     }
 }
