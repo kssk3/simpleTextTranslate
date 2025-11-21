@@ -52,7 +52,6 @@ class PapagoTranslationServiceTest {
                 }""";
 
         mockWebServer.enqueue(new MockResponse()
-                .setResponseCode(200)
                 .setBody(responseJson)
                 .setHeader("Content-Type", "application/json")
         );
@@ -65,6 +64,29 @@ class PapagoTranslationServiceTest {
         assertEquals("Hello", result.getTranslatedText());
         assertEquals("POST", request.getMethod());
         assertEquals("test-id", request.getHeader("X-NCP-APIGW-API-KEY-ID"));
+    }
+
+    @DisplayName(" 언어 번역 통과")
+    @Test
+    void 언어_번역_통과() {
+        // given
+        String jsonBody = """
+                {"message":{
+                    "result":{
+                        "translatedText" : "こんにちは"
+                        }
+                    }
+                }""";
+
+        // when
+        mockWebServer.enqueue(new MockResponse()
+                .setBody(jsonBody)
+                .setHeader("Content-Type", "application/json"));
+
+        //then
+        TargetText japanese = service.translate("안녕하세요", TargetLanguage.JAPANESE.getCode());
+        assertEquals("こんにちは", japanese.getTranslatedText());
+
     }
 
     @DisplayName("API 호출 실패시 예외 발생")
@@ -93,7 +115,6 @@ class PapagoTranslationServiceTest {
         );
 
         // when
-
         assertThatThrownBy(() -> service.translate("안녕하세요", TargetLanguage.ENGLISH.getCode()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("API");
