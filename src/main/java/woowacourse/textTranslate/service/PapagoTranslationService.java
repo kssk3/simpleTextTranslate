@@ -15,7 +15,6 @@ import woowacourse.textTranslate.error.ErrorMessage;
 
 public class PapagoTranslationService implements TranslationService {
 
-    private static final String API_URL = "https://papago.apigw.ntruss.com/nmt/v1/translation";
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final String SOURCE_LANGUAGE = "ko";
 
@@ -101,7 +100,7 @@ public class PapagoTranslationService implements TranslationService {
 
     protected Request buildRequest(RequestBody requestBody) {
         Request request = new Request.Builder()
-                .url(API_URL)
+                .url(this.apiUrl)
                 .header("X-NCP-APIGW-API-KEY-ID", clientId)
                 .header("X-NCP-APIGW-API-KEY", clientSecret)
                 .post(requestBody)
