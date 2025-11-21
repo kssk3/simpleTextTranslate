@@ -16,8 +16,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import org.jetbrains.annotations.NotNull;
 import woowacourse.textTranslate.domain.TargetLanguage;
+import woowacourse.textTranslate.view.TranslatorView;
 
-public class TranslatorGUI {
+public class TranslatorGUI implements TranslatorView {
 
     private final JFrame frame;
     private final JTextField inputField;
@@ -67,14 +68,14 @@ public class TranslatorGUI {
         frame.add(mainPanel);
     }
 
-    private @NotNull JPanel createLanguagePanel() {
+    private JPanel createLanguagePanel() {
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.add(new JLabel("번역할 언어 "));
         topPanel.add(targetLanguageComboBox);
         return topPanel;
     }
 
-    private @NotNull JPanel createInputPanel() {
+    private JPanel createInputPanel() {
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel inputLabel = new JLabel("한글 입력 : ");
         inputPanel.add(inputLabel);
@@ -82,13 +83,13 @@ public class TranslatorGUI {
         return inputPanel;
     }
 
-    private @NotNull JPanel createButtonPanel() {
+    private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.add(translateButton);
         return buttonPanel;
     }
 
-    private @NotNull JPanel createResultPanel() {
+    private JPanel createResultPanel() {
         JPanel resultPanel = new JPanel(new BorderLayout());
         JLabel resultLabel = new JLabel("번역 결과 : ");
         resultArea.setEditable(false);
@@ -105,18 +106,22 @@ public class TranslatorGUI {
         translateButton.addActionListener(e -> listener.run());
     }
 
+    @Override
     public void displayError(String errorMessage) {
         JOptionPane.showMessageDialog(frame, errorMessage, "오류", JOptionPane.ERROR_MESSAGE);
     }
 
+    @Override
     public TargetLanguage getTargetLanguage() {
         return (TargetLanguage) targetLanguageComboBox.getSelectedItem();
     }
 
+    @Override
     public void displayResult(String result) {
         resultArea.setText(result);
     }
 
+    @Override
     public String getInputText() {
         return inputField.getText().trim();
     }

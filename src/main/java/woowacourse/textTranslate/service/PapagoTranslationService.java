@@ -19,15 +19,30 @@ public class PapagoTranslationService implements TranslationService {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final String SOURCE_LANGUAGE = "ko";
 
+    private final String apiUrl;
     private final OkHttpClient client;
     private final String clientId;
     private final String clientSecret;
 
     public PapagoTranslationService(String clientId, String clientSecret) {
+        this(clientId, clientSecret, "https://papago.apigw.ntruss.com/nmt/v1/translation", new OkHttpClient());
+    }
+
+    public PapagoTranslationService(String clientId, String clientSecret, String apiUrl, OkHttpClient client) {
         validate(clientId, clientSecret);
         this.clientId = clientId;
         this.clientSecret = clientSecret;
-        this.client = new OkHttpClient();
+        this.apiUrl = apiUrl;
+        this.client = client;
+    }
+
+    private void validate(String clientId, String clientSecret) {
+        if (clientId == null || clientId.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.NAVER_CLIENT_ID.getMessage());
+        }
+        if (clientSecret == null || clientSecret.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.NAVER_CLIENT_SECRET.getMessage());
+        }
     }
 
     @Override
@@ -45,6 +60,15 @@ public class PapagoTranslationService implements TranslationService {
         }
     }
 
+    private void validateTranslateParam(String koreanText, String targetLanguageCode) {
+        if (koreanText == null || koreanText.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_TEXT_INPUT.getMessage());
+        }
+
+        if (targetLanguageCode == null || targetLanguageCode.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_CHOICE_LANGUAGE.getMessage());
+        }
+    }
 //    private static @NotNull FormBody buildRequestBody(String koreanText, String targetLanguageCode) {
 //        FormBody requestBody = new FormBody.Builder()
 //                .add("source", SOURCE_LANGUAGE)
@@ -52,10 +76,11 @@ public class PapagoTranslationService implements TranslationService {
 //                .add("text", koreanText)
 //                .build();
 //        return requestBody;
-//    }
 
+//    }
     //    TODO Json 방식
-    private static RequestBody buildRequestBody(String koreanText, String targetLanguageCode) {
+
+    protected static RequestBody buildRequestBody(String koreanText, String targetLanguageCode) {
         JsonObject json = new JsonObject();
         json.addProperty("source", SOURCE_LANGUAGE);
         json.addProperty("target", targetLanguageCode);
@@ -63,7 +88,6 @@ public class PapagoTranslationService implements TranslationService {
 
         return RequestBody.create(json.toString(), JSON);
     }
-
 //    private @NotNull Request buildRequest(FormBody requestBody) {
 //        Request request = new Request.Builder()
 //                .url(API_URL)
@@ -72,9 +96,10 @@ public class PapagoTranslationService implements TranslationService {
 //                .post(requestBody)
 //                .build();
 //        return request;
+
 //    }
 
-    private Request buildRequest(RequestBody requestBody) {
+    protected Request buildRequest(RequestBody requestBody) {
         Request request = new Request.Builder()
                 .url(API_URL)
                 .header("X-NCP-APIGW-API-KEY-ID", clientId)
@@ -84,7 +109,7 @@ public class PapagoTranslationService implements TranslationService {
         return request;
     }
 
-    private static TargetText parseResponse(Response response) throws IOException {
+    protected static TargetText parseResponse(Response response) throws IOException {
         if (!response.isSuccessful()) {
             throw new RuntimeException("API 호출 실패 : " + response.code());
         }
@@ -107,24 +132,5 @@ public class PapagoTranslationService implements TranslationService {
                 .map(result -> result.get("translatedText"))
                 .map(element -> element.getAsString())
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.RESPONSE_BODY_EMPTY.getMessage()));
-    }
-
-    private void validate(String clientId, String clientSecret) {
-        if (clientId == null || clientId.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.NAVER_CLIENT_ID.getMessage());
-        }
-        if (clientSecret == null || clientSecret.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.NAVER_CLIENT_SECRET.getMessage());
-        }
-    }
-
-    private void validateTranslateParam(String koreanText, String targetLanguageCode) {
-        if (koreanText == null || koreanText.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_TEXT_INPUT.getMessage());
-        }
-
-        if (targetLanguageCode == null || targetLanguageCode.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_CHOICE_LANGUAGE.getMessage());
-        }
     }
 }

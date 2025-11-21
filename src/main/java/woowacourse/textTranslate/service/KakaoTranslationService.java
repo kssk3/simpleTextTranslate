@@ -12,14 +12,19 @@ import woowacourse.textTranslate.domain.TargetText;
 
 public class KakaoTranslationService implements TranslationService {
 
-    private static final String API_URL = "https://dapi.kakao.com/v2/translation/translate";
-    private final OkHttpClient client;
     private final String apiKey;
+    private final String apiUrl;
+    private final OkHttpClient client;
 
     public KakaoTranslationService(String apiKey) {
+        this(apiKey, "https://dapi.kakao.com/v2/translation/translate", new OkHttpClient());
+    }
+
+    public KakaoTranslationService(String apiKey, String apiUrl, OkHttpClient client) {
         validate(apiKey);
         this.apiKey = apiKey;
-        this.client = new OkHttpClient();
+        this.apiUrl = apiUrl;
+        this.client = client;
     }
 
     @Override
@@ -32,7 +37,7 @@ public class KakaoTranslationService implements TranslationService {
                 .build();
 
         Request request = new Request.Builder()
-                .url(API_URL)
+                .url(this.apiUrl)
                 .header("Authorization", "KakaoAK=" + apiKey)
                 .post(requestBody)
                 .build();

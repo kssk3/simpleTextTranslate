@@ -3,14 +3,16 @@ package woowacourse.textTranslate.view.cli.view;
 import java.util.Scanner;
 import woowacourse.textTranslate.domain.TargetLanguage;
 import woowacourse.textTranslate.error.ErrorMessage;
+import woowacourse.textTranslate.view.TranslatorView;
 
-public class TranslatorCLI {
+public class TranslatorCLI implements TranslatorView {
     private final Scanner scanner;
 
     public TranslatorCLI() {
         this.scanner = new Scanner(System.in);
     }
 
+    @Override
     public void showWellComeMessage() {
         System.out.println("╔═══════════════════════════════════╗");
         System.out.println("║   한글-영어 번역기 (CLI 버전)    ║");
@@ -18,11 +20,13 @@ public class TranslatorCLI {
         System.out.println();
     }
 
+    @Override
     public String getInputText() {
         System.out.println("번역할 한글 텍스트를 입력하세요: ");
         return scanner.nextLine().trim();
     }
 
+    @Override
     public TargetLanguage getTargetLanguage() {
         System.out.println("번역할 언어를 선택하세요:");
         System.out.println("1. 영어 (English)");
@@ -48,17 +52,20 @@ public class TranslatorCLI {
         };
     }
 
+    @Override
     public boolean askContinue() {
         System.out.print("계속 번역하시겠습니까? (y/n): ");
         String response = scanner.nextLine().trim().toLowerCase();
         return response.equals("y") || response.equals("yes");
     }
 
+    @Override
     public void displayError(String errorMessage) {
         System.out.println("오류 : " + errorMessage);
         System.err.println();
     }
 
+    @Override
     public void displayResult(String translatedText) {
         System.out.println("\n─────────────────────────────────");
         System.out.println("📝 번역 결과:");
@@ -66,6 +73,7 @@ public class TranslatorCLI {
         System.out.println("─────────────────────────────────\n");
     }
 
+    @Override
     public void close() {
         System.out.println("프로그램을 종료하겠습니다.");
         scanner.close();
