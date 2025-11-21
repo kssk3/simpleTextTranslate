@@ -8,6 +8,7 @@ import okhttp3.FormBody.Builder;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import woowacourse.textTranslate.config.HttpClientProvider;
 import woowacourse.textTranslate.domain.TargetText;
 
 public class KakaoTranslationService implements TranslationService {
@@ -17,7 +18,7 @@ public class KakaoTranslationService implements TranslationService {
     private final OkHttpClient client;
 
     public KakaoTranslationService(String apiKey) {
-        this(apiKey, "https://dapi.kakao.com/v2/translation/translate", new OkHttpClient());
+        this(apiKey, "https://dapi.kakao.com/v2/translation/translate", HttpClientProvider.getInstance());
     }
 
     public KakaoTranslationService(String apiKey, String apiUrl, OkHttpClient client) {

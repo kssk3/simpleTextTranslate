@@ -10,6 +10,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import woowacourse.textTranslate.config.HttpClientProvider;
 import woowacourse.textTranslate.domain.TargetText;
 import woowacourse.textTranslate.error.ErrorMessage;
 
@@ -24,7 +25,7 @@ public class PapagoTranslationService implements TranslationService {
     private final String clientSecret;
 
     public PapagoTranslationService(String clientId, String clientSecret) {
-        this(clientId, clientSecret, "https://papago.apigw.ntruss.com/nmt/v1/translation", new OkHttpClient());
+        this(clientId, clientSecret, "https://papago.apigw.ntruss.com/nmt/v1/translation", HttpClientProvider.getInstance());
     }
 
     public PapagoTranslationService(String clientId, String clientSecret, String apiUrl, OkHttpClient client) {

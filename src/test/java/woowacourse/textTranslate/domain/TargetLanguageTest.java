@@ -42,6 +42,7 @@ class TargetLanguageTest {
         TargetLanguage english = TargetLanguage.valueOf("ENGLISH");
 
         assertEquals("en", english.getCode());
+        assertEquals("영어", english.getDisplayName());
     }
 
     @DisplayName("존재하지 않은 언어 이름으로 호출시 예외 발생")
@@ -51,5 +52,5 @@ class TargetLanguageTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    
+
 }

@@ -14,13 +14,13 @@ public class ApiKeyProvider {
         validateApiKey(clientId, clientSecret);
     }
 
-    private static void validateApiKey(String clientId, String clientSecret) {
+    private void validateApiKey(String clientId, String clientSecret) {
         if (clientId == null || clientId.isEmpty() || clientSecret == null || clientSecret.isEmpty()) {
             throw new RuntimeException(ErrorMessage.INVALID_NAVER_CLIENT_API.getMessage());
         }
     }
 
-    private static String loadApiKey(String keyName) {
+    private String loadApiKey(String keyName) {
         // 1. 환경 변수에서 읽기 시도
         String apiKey = System.getenv(keyName);
         if (apiKey != null && !apiKey.isEmpty()) {
