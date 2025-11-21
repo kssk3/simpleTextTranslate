@@ -14,6 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import woowacourse.textTranslate.domain.TargetLanguage;
 import woowacourse.textTranslate.domain.TargetText;
+import woowacourse.textTranslate.error.ErrorMessage;
 
 class PapagoTranslationServiceTest {
 
@@ -118,4 +119,39 @@ class PapagoTranslationServiceTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("API");
     }
+
+    @DisplayName("responseBody가 null 일 때 예외 발생")
+    @Test
+    void responseBody가_null_일_때_예외_발생() {
+        // given
+        mockWebServer.enqueue(new MockResponse()
+                .setResponseCode(200)
+                .setBody(""));
+
+        // when & then
+        assertThatThrownBy(() -> service.translate("안녕하세요", TargetLanguage.ENGLISH.getCode()))
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    @DisplayName("clientId 값이 null 일때 예외 발생")
+    @Test
+    void clientId_값이_null_일때_예외_발생() {
+        assertThatThrownBy(() -> new PapagoTranslationService(null, "secret"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("clientSecret 값이 빈 문자열일 때 예외 발생")
+    @Test
+    void clientSecret_값이_빈_문자열일_때_예외_발생() {
+        assertThatThrownBy(() -> new PapagoTranslationService("clientId", ""))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("translator 호출시 KoreanText가 null이면 예외 발생")
+    @Test
+    void translator_호출시_KoreanText가_null이면_예외_발생() {
+        assertThatThrownBy(() -> service.translate(null, TargetLanguage.ENGLISH.getCode()))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    
 }
