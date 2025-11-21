@@ -66,7 +66,7 @@ class PapagoTranslationServiceTest {
         assertEquals("test-id", request.getHeader("X-NCP-APIGW-API-KEY-ID"));
     }
 
-    @DisplayName(" 언어 번역 통과")
+    @DisplayName("언어 번역 통과")
     @Test
     void 언어_번역_통과() {
         // given
@@ -86,7 +86,6 @@ class PapagoTranslationServiceTest {
         //then
         TargetText japanese = service.translate("안녕하세요", TargetLanguage.JAPANESE.getCode());
         assertEquals("こんにちは", japanese.getTranslatedText());
-
     }
 
     @DisplayName("API 호출 실패시 예외 발생")

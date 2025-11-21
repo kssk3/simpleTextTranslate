@@ -2,6 +2,7 @@ package woowacourse.textTranslate.config;
 
 import woowacourse.textTranslate.domain.Translator;
 import woowacourse.textTranslate.service.PapagoTranslationService;
+import woowacourse.textTranslate.service.TranslationService;
 
 public class TranslatorFactory {
 
