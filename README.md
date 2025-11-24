@@ -21,7 +21,6 @@ AI를 활용하여 메서드의 구현 로직과 반환값을 분석하고, 적�
 2. **IntelliJ IDEA 플러그인 개발** (예정)
     - 코드 작성 중 실시간 번역 기능
     - AI 기반 메서드명 자동 생성 기능
-
 ---
 
 ## 🎯개발 목적
@@ -255,6 +254,7 @@ void 정상_응답_파싱_통과() {
 
 참고 자료 :
 
+- https://wikidocs.net/208032
 - https://api.ncloud-docs.com/docs/ai-naver-papagotranslation-example01
 - https://api.ncloud-docs.com/docs/ai-naver-papagonmt-translation
 - https://hbase.tistory.com/90
