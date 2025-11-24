@@ -1,0 +1,35 @@
+<idea-plugin>
+    <id>woowacourse.textTranslate</id>
+    <name>Text Translate</name>
+    <vendor email="support@woowacourse.com" url="https://woowacourse.com">woowacourse</vendor>
+
+    <description><![CDATA[
+    한국어를 영어로 빠르게 번역해주는 IntelliJ IDEA 플러그인입니다.<br>
+    개발 중 변수명이나 메서드명을 지을 때 유용합니다.<br>
+    <br>
+    <b>Features:</b>
+    <ul>
+      <li>텍스트 선택 후 단축키로 즉시 번역</li>
+      <li>카카오 i 번역 API 연동</li>
+      <li>번역 결과를 팝업으로 표시</li>
+    </ul>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- TranslatorSettings 서비스 등록 -->
+        <applicationService serviceImplementation="woowacourse.plugin.TranslatorSettings"/>
+    </extensions>
+
+    <actions>
+        <!-- Alt+T: 즉시 번역 -->
+        <action id="TranslateKorean"
+                class="woowacourse.plugin.TranslateAction"
+                text="Translate Korean Word">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt T"/>
+            <add-to-group group-id="EditorActions" anchor="last"/>
+        </action>
+
+    </actions>
+</idea-plugin>
